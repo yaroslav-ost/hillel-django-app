@@ -1,4 +1,7 @@
 import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
 DEBUG=True,
 ROOT_URLCONF='zen'
 
@@ -6,7 +9,7 @@ SECRET_KEY = 'Test'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
