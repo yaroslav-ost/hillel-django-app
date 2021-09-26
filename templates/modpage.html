@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index of {{ title }}</title>
+</head>
+<body>
+<div>
+    {% for att in attributes %}
+    <a href="{{mod}}/{{att}}">{{att}}</a>
+    <br>
+    {% endfor %}
+</div>
+</body>
+</html>
