@@ -5,13 +5,15 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import path, re_path
 from random import choice
+from pathlib import Path
+from settings import BASE_DIR
 
 text = ''.join(this.d.get(c, c) for c in this.s)
 title, _, *quotes = text.splitlines()
 
 
 def get_favicon(request):
-    image_data = open("favicon.png", "rb").read()
+    image_data = open(BASE_DIR/"favicon.png", "rb").read()
     return HttpResponse(image_data)
 
 
