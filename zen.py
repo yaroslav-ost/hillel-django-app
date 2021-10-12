@@ -103,6 +103,7 @@ urlpatterns = [
     path('doc/<mod_name>/<att_name>', get_att_page),
 ]
 
+create_table(CREATE_URLS_TABLE)
+
 if __name__ == '__main__':
-    create_table(CREATE_URLS_TABLE)
     execute_from_command_line()
