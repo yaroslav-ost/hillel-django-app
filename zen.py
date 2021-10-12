@@ -52,12 +52,13 @@ def get_homepage(request):
         context['url'] = url
         if url.lower().startswith(('http:', 'https:', 'ftp:')):
             context['is_valid'] = True
-            while True:
+            unique_id_found = False
+            while not unique_id_found:
                 url_key = generate_random_key(5)
                 with connection.cursor() as c:
                     try:
                         c.execute(INSERT_INTO_URLS, (url_key, url))
-                        break
+                        unique_id_found = True
                     except IntegrityError as e:
                         if 'unique constraint' in e.args[0].lower():
                             print(f"Short-key {url_key} already exists in the db. Generating the new one.")
