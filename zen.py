@@ -38,11 +38,10 @@ def get_favicon(request):
 
 
 def generate_random_key(length):
-    if length > 0:
-        letters = string.ascii_letters
-        digits = string.digits
-        random_key = ''.join(random.choice(letters + digits) for i in range(length))
-        return random_key
+    letters = string.ascii_letters
+    digits = string.digits
+    random_key = ''.join(random.choice(letters + digits) for i in range(length))
+    return random_key
 
 
 def get_homepage(request):
