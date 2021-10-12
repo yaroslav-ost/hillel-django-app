@@ -1,9 +1,20 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>URL shortener</title>
 </head>
 <body>
-<h1>{{ message }}</h1>
+{% if is_post_method %}
+<h1>
+    {% if is_valid %}
+    <a href="/{{ url_key }}"> {{ url_key }} </a>
+    {% else %}
+    Invalid URL {{ url }}. Allowed schemes: https,http,ftp
+    {% endif %}
+</h1>
+{% endif %}
+<form action="" method="POST">
+    <input type="text" name="url">
+    <input type="submit">
+</form>
 </body>
 </html>
