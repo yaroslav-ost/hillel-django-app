@@ -13,32 +13,19 @@ title, _, *quotes = text.splitlines()
 
 
 def get_favicon(request):
-    image_data = open(BASE_DIR/"favicon.png", "rb").read()
+    image_data = open(BASE_DIR / "favicon.png", "rb").read()
     return HttpResponse(image_data)
 
-
-def get_module(mod_name):
-    try:
-        module = importlib.import_module(mod_name)
-    except ModuleNotFoundError:
-        return
-    return module
-
-
-def get_attribute(module, att_name):
-    try:
-        attribute = getattr(module, att_name)
-    except AttributeError:
-        return
-    return attribute
 
 def get_homepage(request):
     context = {'title': title, 'message': choice(quotes)}
     return render(request, 'homepage.html', context)
 
+
 def get_mod_page(request, mod_name):
-    module = get_module(mod_name)
-    if module is None:
+    try:
+        module = importlib.import_module(mod_name)
+    except ModuleNotFoundError:
         return HttpResponse(f"No module named '{mod_name}'", status=404)
     attributes = [func for func in dir(module) if not func.startswith('_')]
     context = {'title': mod_name, 'mod': mod_name, 'attributes': attributes}
@@ -46,10 +33,11 @@ def get_mod_page(request, mod_name):
 
 
 def get_att_page(request, mod_name, att_name):
-    module = get_module(mod_name)
-    if module is None:
+    try:
+        module = importlib.import_module(mod_name)
+    except ModuleNotFoundError:
         return HttpResponse(f"No module named '{mod_name}'", status=404)
-    attribute = get_attribute(module, att_name)
+    attribute = getattr(module, att_name, None)
     if attribute is None:
         return HttpResponse(f"Module '{mod_name}' has no attribute '{att_name}'", status=404)
     return HttpResponse(attribute.__doc__, content_type='text/plain')
