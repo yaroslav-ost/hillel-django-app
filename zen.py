@@ -14,6 +14,7 @@ url_key CHAR(5) PRIMARY KEY,
 url TEXT
 );
 '''
+
 INSERT_INTO_URLS = '''
 INSERT INTO urls (url_key, url)
 VALUES (%s, %s);
@@ -47,8 +48,8 @@ def generate_random_key(length):
 def get_homepage(request):
     context = {}
     if request.method == 'POST':
-        context['is_post_method'] = True
         url = request.POST['url']
+        context['is_post_method'] = True
         context['url'] = url
         is_url_valid = url.lower().startswith(('http:', 'https:', 'ftp:'))
         if is_url_valid:
