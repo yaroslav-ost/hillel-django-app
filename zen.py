@@ -50,9 +50,8 @@ def get_homepage(request):
         url = request.POST['url']
         context['is_post_method'] = True
         context['url'] = url
-        is_url_valid = url.lower().startswith(('http:', 'https:', 'ftp:'))
-        if is_url_valid:
-            context['is_valid'] = is_url_valid
+        if url.lower().startswith(('http:', 'https:', 'ftp:')):
+            context['is_valid'] = True
             while True:
                 url_key = generate_random_key(5)
                 with connection.cursor() as c:
