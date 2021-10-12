@@ -48,7 +48,6 @@ def get_homepage(request):
     context = {}
     if request.method == 'POST':
         url = request.POST['url']
-        context['is_post_method'] = True
         context['url'] = url
         if url.lower().startswith(('http:', 'https:', 'ftp:')):
             context['is_valid'] = True

@@ -3,7 +3,7 @@
     <title>URL shortener</title>
 </head>
 <body>
-{% if is_post_method %}
+{% if url %}
 <h1>
     {% if is_valid %}
     <a href="/{{ url_key }}"> {{ url_key }} </a>
