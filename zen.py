@@ -61,7 +61,7 @@ def get_homepage(request):
                         break
                     except IntegrityError as e:
                         if 'unique constraint' in e.args[0].lower():
-                            print(f"Short-key {url_key} already exists in the db. Generating new one.")
+                            print(f"Short-key {url_key} already exists in the db. Generating the new one.")
             context['url_key'] = url_key
     return render(request, 'homepage.html', context)
 
